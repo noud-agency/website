@@ -1,21 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
+import { Star, ArrowDown } from 'lucide-react';
 
 // Fungsi untuk menampilkan bintang rating
 const StarRating = ({ rating = 5 }) => (
-  <div className="flex space-x-1 mb-4">
+  <div className="flex gap-0.5">
     {[...Array(5)].map((_, i) => (
-      <motion.span
+      <Star
         key={i}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: i * 0.1, duration: 0.3 }}
-        className={`text-lg ${i < rating ? 'text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]' : 'text-zinc-700'
+        className={`w-4 h-4 ${i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-zinc-700'
           }`}
-      >
-        <Star className="w-5 h-5 fill-current" />
-      </motion.span>
+      />
     ))}
   </div>
 );
@@ -52,47 +47,25 @@ const testimonials = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 12
-    }
-  }
-};
-
 const Testimonials: React.FC = () => {
   return (
-    <section id="impact" className="py-32 px-6 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-black/90 z-0"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px] pointer-events-none"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] pointer-events-none"></div>
+    <section id="impact" className="py-20 md:py-28 lg:py-32 px-4 md:px-6 relative overflow-hidden bg-black">
+      {/* Simplified Background Elements */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16 md:mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-2xl"
           >
-            <h2 className="text-5xl md:text-6xl font-sans font-bold text-white tracking-tight leading-tight">
-              Success stories <br />
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-white tracking-tight leading-tight mb-4">
+              Success stories <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
                 from our Users
               </span>
@@ -100,83 +73,79 @@ const Testimonials: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden md:block"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex items-center gap-3"
           >
-            <p className="text-zinc-400 text-lg max-w-md text-right">
-              Join hundreds of companies transforming their operations with Noud AI.
+            <ArrowDown className="w-5 h-5 text-zinc-500 animate-bounce" />
+            <p className="text-zinc-400 text-sm md:text-base max-w-md">
+              Join hundreds of companies transforming their<br className="hidden lg:block" /> operations with Noud AI.
             </p>
           </motion.div>
         </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((item, idx) => (
             <motion.div
               key={idx}
-              variants={cardVariants}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="group relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="group relative h-full"
             >
-              {/* Card Background with Glassmorphism */}
-              <div className="absolute inset-0 bg-zinc-900/40 backdrop-blur-xl rounded-2xl border border-white/5 transition-all duration-300 group-hover:border-yellow-500/30 group-hover:bg-zinc-900/60 group-hover:shadow-[0_0_30px_rgba(234,179,8,0.1)]"></div>
+              {/* Modern Card with Subtle Border */}
+              <div className="relative h-full bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-white/5 p-6 md:p-8 transition-all duration-300 hover:border-yellow-500/20 hover:bg-zinc-900/70">
 
-              <div className="relative p-8 h-full flex flex-col">
-                {/* Header Stat */}
-                <div className="mb-6 pb-6 border-b border-white/5 group-hover:border-yellow-500/20 transition-colors">
-                  <motion.p
-                    className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 mb-2"
-                    whileHover={{ scale: 1.05, originX: 0 }}
-                  >
+                {/* Stat Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 mb-6">
+                  <span className="text-sm md:text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
                     {item.stat}
-                  </motion.p>
+                  </span>
+                </div>
+
+                {/* Star Rating */}
+                <div className="mb-6">
                   <StarRating rating={item.rating} />
                 </div>
 
-                {/* Quote Icon */}
-                <div className="absolute top-8 right-8 text-yellow-500/10 group-hover:text-yellow-500/20 transition-colors transform group-hover:scale-110 duration-500">
-                  <Quote size={64} />
-                </div>
-
-                {/* Quote Text */}
-                <div className="flex-grow mb-8 relative z-10">
-                  <p className="text-lg text-zinc-300 font-medium leading-relaxed italic">
+                {/* Quote */}
+                <blockquote className="mb-8">
+                  <p className="text-base md:text-lg text-zinc-300 leading-relaxed">
                     "{item.quote}"
                   </p>
-                </div>
+                </blockquote>
 
                 {/* Author Info */}
-                <div className="flex items-center space-x-4 mt-auto">
+                <div className="flex items-center gap-3 mt-auto pt-6 border-t border-white/5">
                   <div className="relative">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-yellow-500/50 transition-colors">
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-zinc-800 group-hover:border-yellow-500/30 transition-colors">
                       <img
                         src={getAvatarUrl(item.author)}
                         alt={item.author}
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="absolute -bottom-1 -right-1 bg-yellow-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                    <div className="absolute -bottom-1 -right-1 bg-yellow-500 text-black text-[9px] font-bold px-1.5 py-0.5 rounded-full">
                       PRO
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors">{item.author}</p>
-                    <p className="text-zinc-500 text-sm group-hover:text-zinc-400 transition-colors">{item.title}</p>
+                    <p className="text-white font-semibold text-sm md:text-base">{item.author}</p>
+                    <p className="text-zinc-500 text-xs md:text-sm">{item.title}</p>
                   </div>
                 </div>
+
+                {/* Subtle Hover Glow */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-500/0 to-orange-500/0 group-hover:from-yellow-500/5 group-hover:to-orange-500/5 transition-all duration-500 pointer-events-none"></div>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

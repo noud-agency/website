@@ -5,6 +5,7 @@ import Partners from './components/Partners';
 import Deliverables from './components/Deliverables';
 import About from './components/About';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 import AnimatedBackground from './components/AnimatedBackground';
 
@@ -52,6 +53,9 @@ const App: React.FC = () => {
         </Suspense>
         <Footer onOpenBooking={scrollToBooking} />
       </div>
+
+      {/* WhatsApp Floating Button */}
+      <WhatsAppButton />
     </main>
   );
 };
