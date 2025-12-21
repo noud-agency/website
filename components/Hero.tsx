@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -8,9 +8,22 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
-  // Generate random floating particles
+  // Detect mobile device
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Generate random floating particles - reduced count for mobile
   const particles = useMemo(() => {
-    return Array.from({ length: 30 }).map((_, i) => ({
+    const count = isMobile ? 8 : 30; // 8 for mobile, 30 for desktop
+    return Array.from({ length: count }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -18,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
       duration: Math.random() * 20 + 15,
       delay: Math.random() * 5,
     }));
-  }, []);
+  }, [isMobile]);
 
   return (
     <section className="relative min-h-screen w-full flex flex-col justify-center px-6 pt-20 pb-20 overflow-hidden border-b border-white/5">

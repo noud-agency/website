@@ -1,17 +1,17 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Partners from './components/Partners';
-import Services from './components/Services';
 import Deliverables from './components/Deliverables';
 import About from './components/About';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
-import Booking from './components/Booking';
 
 import AnimatedBackground from './components/AnimatedBackground';
 
-// ... (DigitalRain component can be removed or kept if we want to mix, but plan said replace. I will remove it to be clean)
+// Lazy load heavy components
+const Services = lazy(() => import('./components/Services'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Booking = lazy(() => import('./components/Booking'));
 
 const App: React.FC = () => {
   // Smooth scroll behavior implementation for anchor links
@@ -39,11 +39,17 @@ const App: React.FC = () => {
       <div className="relative z-10 flex flex-col gap-0">
         <Hero onOpenBooking={scrollToBooking} />
         <Partners />
-        <Services />
+        <Suspense fallback={<div className="min-h-screen bg-black" />}>
+          <Services />
+        </Suspense>
         <Deliverables />
         <About />
-        <Testimonials />
-        <Booking />
+        <Suspense fallback={<div className="min-h-screen bg-black" />}>
+          <Testimonials />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-screen bg-black" />}>
+          <Booking />
+        </Suspense>
         <Footer onOpenBooking={scrollToBooking} />
       </div>
     </main>
