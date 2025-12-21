@@ -165,7 +165,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
               {/* Instagram */}
               <motion.a
-                href="https://instagram.com/noudai"
+                href="https://instagram.com/noud.agency"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 4 }}

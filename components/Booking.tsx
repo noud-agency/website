@@ -64,7 +64,7 @@ const Booking: React.FC = () => {
           {/* Right Column: Calendar */}
           <div className="w-full lg:w-3/5 xl:w-2/3 bg-white h-[600px] md:h-[650px] lg:h-auto lg:min-h-[600px]">
             <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0L1PeA3fW56Cu_n5xJ7mE4RWwxxHgsmxAbKUFps0_9bQcRg_sfMII2fkXC_GJckOWb9f2cnMHe?gv=true"
+              src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2tCdg06ddphpsMZfP39Zi5UgMcI2o-enILwTQ2QIwYFtBBfT2d-xc6nlbmwSn2qRQsdewrjvSa"
               style={{ border: 0 }}
               width="100%"
               height="100%"
