@@ -76,6 +76,11 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           className="flex items-center gap-2 cursor-pointer group mr-4"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
+          <img
+            src="/logo.png"
+            alt="Noud AI Logo"
+            className="w-8 h-8 object-contain"
+          />
           <span className="font-sans text-sm font-bold text-white tracking-tight">NoudAI</span>
         </div>
 
@@ -87,8 +92,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
               className={`text-[13px] font-medium transition-colors duration-300 tracking-wide ${activeSection === item.href.substring(1)
-                  ? 'text-white'
-                  : 'text-zinc-500 hover:text-zinc-300'
+                ? 'text-white'
+                : 'text-zinc-500 hover:text-zinc-300'
                 }`}
             >
               {item.name}
